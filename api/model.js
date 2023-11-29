@@ -55,7 +55,7 @@ class Model {
 
     file.push([data.email, data.limit]);
 
-    fs.writeFileSync(this.usersJsonPath, file);
+    fs.writeFileSync(this.usersJsonPath, JSON.stringify(file));
 
     return response({
       status: 1,
@@ -98,7 +98,7 @@ class Model {
       } else return el
     })
 
-    fs.writeFileSync(this.usersJsonPath, file);
+    fs.writeFileSync(this.usersJsonPath, JSON.stringify(file));
 
     return response({
       status: 1,
@@ -137,7 +137,7 @@ class Model {
       } else {return true}
     })
 
-    fs.writeFileSync(this.usersJsonPath, file);
+    fs.writeFileSync(this.usersJsonPath, JSON.stringify(file));
 
     return response({
       status: 1,
