@@ -7,9 +7,9 @@ function restore_banned_ips() {
   while IFS=',' read -r ip end_time; do
     current_time=$(date +%s)
     if (( current_time >= end_time )); then
-      iptables -D INPUT -s $ip -j DROP
+      ufw delete deny from $ip
     else
-      iptables -A INPUT -s $ip -j DROP
+      ufw deny from $ip
     fi
   done < "$CSV_FILE"
 }

@@ -39,10 +39,6 @@ class Model {
   add(data) {
     let file = new File().GetJsonFile(this.usersJsonPath);
 
-    // file = file.split("\r\n").map((item) => item.split(","));
-
-    console.log('add:file: ', file)
-
     if (file.some((item) => item[0] === data.email) === true)
       return response({
         error: {
@@ -50,8 +46,6 @@ class Model {
           reason: "This email already exists",
         },
       });
-
-    // const dataToCsv = `${data.email},${data.limit}\r\n`;
 
     file.push([data.email, data.limit]);
 
@@ -72,11 +66,6 @@ class Model {
 
   update(data) {
     let file = new File().GetJsonFile(this.usersJsonPath);
-
-    // let emails = file
-    //   .split("\r\n")
-    //   .filter((item) => item.trim())
-    //   .map((item) => [item.split(",")[0], item.split(",")[1]]);
 
     let check = false;
     for (const el of file) {
@@ -112,9 +101,7 @@ class Model {
    * @param {ApiAddDataType} data
    */
   delete(data) {
-    let file = new File().GetCsvFile(this.usersJsonPath);
-
-    // let emails = file.split("\r\n").filter((item) => item.trim());
+    let file = new File().GetJsonFile(this.usersJsonPath);
 
     let check = false;
     for (const el of file) {
@@ -152,7 +139,7 @@ class Model {
     try {
       user = await db.read(email);
     } catch (e) {
-      // console.error(e)
+
       return response({
         error: {
           type: "NOT_FOUND",
